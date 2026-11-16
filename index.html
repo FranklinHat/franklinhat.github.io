@@ -151,6 +151,12 @@
     .card .tags { margin-top: 18px; }
     .card-links { display: flex; gap: 18px; font-size: 15px; font-weight: 500; margin-top: 18px; }
 
+    .shot {
+      width: 100%; max-width: 520px; display: block;
+      margin: 18px 0 4px; border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
     /* ---------- Skills ---------- */
     .skills-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
@@ -241,6 +247,7 @@
           <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
+      <!-- Optional: add a photo named photo.jpg to the repo. If it's missing, this hides itself. -->
       <img class="photo" src="photo.jpg" alt="Photo of Franklin Hatulan" onerror="this.style.display='none'">
     </div>
   </header>
@@ -271,6 +278,7 @@
               <span class="status">deployed on my home server</span>
             </div>
             <p>A lightweight Go service that turns alerts from my self-hosted Docker services into readable Discord notifications, so I know what's happening on my server without checking it.</p>
+            <img class="shot" src="gateway-screenshot.png" alt="Discord alerts sent by the gateway: a red 'Plex Media Server is down' alert and a green 'Gateway Proxy is ok' alert">
             <h4>Features</h4>
             <ul>
               <li>Receives alerts over HTTP and formats service status into clean Discord messages</li>
@@ -463,7 +471,6 @@
         <h2 data-num="06.">Contact</h2>
         <p>I'm currently looking for software engineering internships. If you have an opportunity or want to talk tech, feel free to reach out.</p>
         <div class="buttons">
-         
           <a class="btn primary" href="mailto:fmhatulan2@gmail.com">Email me</a>
           <a class="btn" href="https://www.linkedin.com/in/franklinhat/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
