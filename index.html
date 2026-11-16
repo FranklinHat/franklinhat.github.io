@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franklin Hatulan — Software Developer</title>
+  <meta name="description" content="Portfolio of Franklin Hatulan, Computer Science student at UW Tacoma.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1115;
+      --surface: #171a21;
+      --border: #262a33;
+      --text: #e6e8ec;
+      --muted: #9aa1ad;
+      --accent: #7dd3a8;
+      --accent-dim: rgba(125, 211, 168, 0.12);
+      --max: 880px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap {
+      display: flex; justify-content: space-between; align-items: center;
+      height: 60px;
+    }
+    .logo {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500; color: var(--text);
+    }
+    .logo span { color: var(--accent); }
+    nav ul { display: flex; gap: 24px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 15px; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero { padding: 110px 0 90px; }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent); font-size: 14px; margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 64px);
+      line-height: 1.05; font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero p { color: var(--muted); max-width: 580px; font-size: 19px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn {
+      display: inline-block; padding: 11px 20px; border-radius: 8px;
+      font-weight: 500; font-size: 15px; border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn:hover { text-decoration: none; border-color: var(--muted); }
+    .btn.primary { background: var(--accent); color: #0f1115; border-color: var(--accent); }
+    .btn.primary:hover { filter: brightness(1.08); }
+
+    /* Sections */
+    section { padding: 70px 0; border-top: 1px solid var(--border); }
+    h2 {
+      font-size: 28px; font-weight: 700; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    h2::before {
+      content: attr(data-num);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 15px; font-weight: 400; color: var(--accent);
+    }
+
+    .about p { color: var(--muted); margin-bottom: 16px; max-width: 680px; }
+    .about p strong { color: var(--text); font-weight: 500; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .tag {
+      font-family: "JetBrains Mono", monospace; font-size: 13px;
+      padding: 4px 10px; border-radius: 6px;
+      background: var(--accent-dim); color: var(--accent);
+    }
+
+    /* Projects */
+    .projects { display: grid; gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: #3a404c; transform: translateY(-2px); }
+    .card-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .card h3 { font-size: 21px; font-weight: 700; }
+    .status {
+      font-family: "JetBrains Mono", monospace; font-size: 12px;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 999px;
+    }
+    .card p { color: var(--muted); margin-bottom: 14px; }
+    .card ul { color: var(--muted); margin: 0 0 18px 20px; }
+    .card li { margin-bottom: 4px; }
+    .card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .card-links { display: flex; gap: 18px; font-size: 15px; font-weight: 500; }
+
+    /* Education / Experience */
+    .timeline { display: grid; gap: 22px; }
+    .item { display: grid; grid-template-columns: 170px 1fr; gap: 20px; }
+    .item .when {
+      font-family: "JetBrains Mono", monospace; font-size: 14px;
+      color: var(--muted); padding-top: 3px;
+    }
+    .item h3 { font-size: 18px; font-weight: 500; }
+    .item .where { color: var(--accent); font-size: 15px; }
+    .item p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+    /* Contact */
+    .contact p { color: var(--muted); max-width: 560px; margin-bottom: 28px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0; color: var(--muted); font-size: 14px;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      nav ul li:nth-child(n+3) { display: none; }
+      .hero { padding: 72px 0 60px; }
+      .item { grid-template-columns: 1fr; gap: 4px; }
+      .card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">franklin<span>.</span>hatulan</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Hi, I'm</p>
+      <h1>Franklin Hatulan.</h1>
+      <p>Computer Science student at the University of Washington Tacoma. I like building backend services and self-hosted tools, mostly in Go and Java, and running them on my own home server.</p>
+      <div class="buttons">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <!-- TODO: put your resume PDF in the repo as resume.pdf -->
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="about">
+      <div class="wrap">
+        <h2 data-num="01.">About me</h2>
+        <p>I'm working toward a <strong>B.A. in Computer Science and Systems</strong> with a <strong>minor in Technical Communication</strong> at UW Tacoma. Before that I earned my associate's degree at Green River College through Running Start, finishing it alongside high school.</p>
+        <p>I'm drawn to the backend side of things: APIs, services that talk to each other, and infrastructure. I run a small homelab where I containerize my projects and keep them running 24/7. That's taught me as much as any class has.</p>
+        <p>Outside of school and code, I work as a Service Lead in retail, so I'm used to leading a shift, solving problems on the spot, and talking to people.</p>
+        <div class="skills">
+          <span class="tag">Java</span>
+          <span class="tag">Go</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Docker</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Git</span>
+          <span class="tag">Linux</span>
+          <span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <h2 data-num="02.">Projects</h2>
+        <div class="projects">
+
+          <article class="card">
+            <div class="card-head">
+              <h3>Homelab Discord Gateway</h3>
+              <span class="status">running in production</span>
+            </div>
+            <p>A lightweight Go service that turns alerts from my self-hosted Docker services into readable Discord notifications, so I know what's happening on my home server without checking it.</p>
+            <ul>
+              <li>Receives alerts over HTTP and formats service status into clean Discord messages</li>
+              <li>Routes each alert to a different Discord channel by URL path using webhooks</li>
+              <li>5-second request timeouts so a slow upstream never hangs the gateway</li>
+              <li>Shipped as a small container with a multi-stage Docker build</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Go</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Discord Webhooks</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/FranklinHat/discordgateway" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>osu! PP Tracker</h3>
+              <span class="status">in progress</span>
+            </div>
+            <p>A Spring Boot backend that calculates the potential performance points (pp) a player could earn on an osu! beatmap, based on their actual hit results.</p>
+            <ul>
+              <li>Authenticates with the official osu! API using OAuth client credentials</li>
+              <li>Takes real 300 / 100 / 50 / miss counts to estimate pp for a play</li>
+              <li>Next up: containerizing it to run on my home server, and adding JUnit tests</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">osu! API</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/FranklinHat/osu-pp-tracker-backend" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <h3>This Website</h3>
+              <span class="status">live</span>
+            </div>
+            <p>My personal portfolio, built with plain HTML and CSS and no frameworks. Hosted on GitHub Pages.</p>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">GitHub Pages</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <h2 data-num="03.">Education &amp; Experience</h2>
+        <div class="timeline">
+          <div class="item">
+            <div class="when">2025 — 2028</div>
+            <div>
+              <h3>B.A. Computer Science &amp; Systems</h3>
+              <div class="where">University of Washington Tacoma</div>
+              <p>Minor in Technical Communication. Expected graduation Winter 2028.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when">2023 — 2025</div>
+            <div>
+              <h3>Associate's Degree</h3>
+              <div class="where">Green River College</div>
+              <p>Completed through Running Start dual enrollment while in high school.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when">2026 — Now</div>
+            <div>
+              <h3>Service Lead</h3>
+              <div class="where">Lolli &amp; Pops · Tukwila, WA</div>
+              <p>Lead evening shifts, keep the team on track, and handle customer issues.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when">2026</div>
+            <div>
+              <h3>Product Demonstrator</h3>
+              <div class="where">Club Demonstration Services · Covington, WA</div>
+              <p>Ran in-store product demos and talked with hundreds of customers a day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2 data-num="04.">Get in touch</h2>
+        <p>I'm currently looking for software engineering internships. If you have an opportunity or just want to talk tech, my inbox is open.</p>
+        <div class="buttons">
+          <!-- TODO: replace with your email -->
+          <a class="btn primary" href="mailto:YOUR_EMAIL_HERE">Email me</a>
+          <!-- TODO: replace with your LinkedIn URL -->
+          <a class="btn" href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Franklin Hatulan · Hosted on GitHub Pages</div>
+  </footer>
+
+</body>
+</html>
