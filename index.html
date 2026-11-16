@@ -17,12 +17,11 @@
       --muted: #9aa1ad;
       --accent: #7dd3a8;
       --accent-dim: rgba(125, 211, 168, 0.12);
-      --max: 880px;
+      --max: 900px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 
     body {
       font-family: "Space Grotesk", system-ui, sans-serif;
@@ -37,39 +36,56 @@
 
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
-    /* Nav */
+    /* ---------- Nav ---------- */
     nav {
       position: sticky; top: 0; z-index: 10;
-      background: rgba(15, 17, 21, 0.85);
+      background: rgba(15, 17, 21, 0.88);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
     nav .wrap {
       display: flex; justify-content: space-between; align-items: center;
-      height: 60px;
+      height: 60px; gap: 20px;
     }
     .logo {
       font-family: "JetBrains Mono", monospace;
-      font-weight: 500; color: var(--text);
+      font-weight: 500; color: var(--text); white-space: nowrap;
     }
     .logo span { color: var(--accent); }
-    nav ul { display: flex; gap: 24px; list-style: none; }
-    nav ul a { color: var(--muted); font-size: 15px; }
+    nav ul {
+      display: flex; gap: 22px; list-style: none;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    nav ul::-webkit-scrollbar { display: none; }
+    nav ul a { color: var(--muted); font-size: 15px; white-space: nowrap; }
     nav ul a:hover { color: var(--text); text-decoration: none; }
 
-    /* Hero */
-    .hero { padding: 110px 0 90px; }
+    /* ---------- Hero ---------- */
+    .hero { padding: 100px 0 80px; }
+    .hero .wrap {
+      display: flex; align-items: center; gap: 48px;
+    }
+    .hero-text { flex: 1; }
+    .photo {
+      width: 200px; height: 200px; border-radius: 50%;
+      object-fit: cover; border: 3px solid var(--border);
+      flex-shrink: 0;
+    }
     .eyebrow {
       font-family: "JetBrains Mono", monospace;
-      color: var(--accent); font-size: 14px; margin-bottom: 16px;
+      color: var(--accent); font-size: 14px; margin-bottom: 14px;
     }
     .hero h1 {
-      font-size: clamp(40px, 7vw, 64px);
+      font-size: clamp(40px, 7vw, 62px);
       line-height: 1.05; font-weight: 700; letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
-    .hero p { color: var(--muted); max-width: 580px; font-size: 19px; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .tagline {
+      font-size: clamp(20px, 3vw, 24px); font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .hero p.intro { color: var(--muted); max-width: 560px; font-size: 18px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .btn {
       display: inline-block; padding: 11px 20px; border-radius: 8px;
       font-weight: 500; font-size: 15px; border: 1px solid var(--border);
@@ -79,7 +95,7 @@
     .btn.primary { background: var(--accent); color: #0f1115; border-color: var(--accent); }
     .btn.primary:hover { filter: brightness(1.08); }
 
-    /* Sections */
+    /* ---------- Sections ---------- */
     section { padding: 70px 0; border-top: 1px solid var(--border); }
     h2 {
       font-size: 28px; font-weight: 700; margin-bottom: 28px;
@@ -90,19 +106,29 @@
       font-family: "JetBrains Mono", monospace;
       font-size: 15px; font-weight: 400; color: var(--accent);
     }
+    h4 {
+      font-family: "JetBrains Mono", monospace; font-weight: 500;
+      font-size: 13px; color: var(--accent); text-transform: uppercase;
+      letter-spacing: 0.06em; margin: 18px 0 8px;
+    }
 
-    .about p { color: var(--muted); margin-bottom: 16px; max-width: 680px; }
+    .about p { color: var(--muted); margin-bottom: 16px; max-width: 700px; }
     .about p strong { color: var(--text); font-weight: 500; }
 
-    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
     .tag {
+      display: inline-block;
       font-family: "JetBrains Mono", monospace; font-size: 13px;
       padding: 4px 10px; border-radius: 6px;
       background: var(--accent-dim); color: var(--accent);
     }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    /* Projects */
-    .projects { display: grid; gap: 20px; }
+    /* ---------- Projects ---------- */
+    .wip-note {
+      font-family: "JetBrains Mono", monospace; font-size: 13px;
+      color: var(--muted); margin: -16px 0 24px;
+    }
+    .projects { display: grid; gap: 22px; }
     .card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 28px;
@@ -111,7 +137,7 @@
     .card:hover { border-color: #3a404c; transform: translateY(-2px); }
     .card-head {
       display: flex; justify-content: space-between; align-items: baseline;
-      gap: 16px; flex-wrap: wrap; margin-bottom: 12px;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 10px;
     }
     .card h3 { font-size: 21px; font-weight: 700; }
     .status {
@@ -119,14 +145,31 @@
       color: var(--muted); border: 1px solid var(--border);
       padding: 2px 8px; border-radius: 999px;
     }
-    .card p { color: var(--muted); margin-bottom: 14px; }
-    .card ul { color: var(--muted); margin: 0 0 18px 20px; }
+    .card p, .card li { color: var(--muted); font-size: 16px; }
+    .card ul { margin-left: 20px; }
     .card li { margin-bottom: 4px; }
-    .card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-    .card-links { display: flex; gap: 18px; font-size: 15px; font-weight: 500; }
+    .card .tags { margin-top: 18px; }
+    .card-links { display: flex; gap: 18px; font-size: 15px; font-weight: 500; margin-top: 18px; }
 
-    /* Education / Experience */
-    .timeline { display: grid; gap: 22px; }
+    /* ---------- Skills ---------- */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .skill-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px;
+    }
+    .skill-box h3 { font-size: 17px; font-weight: 500; margin-bottom: 14px; }
+    .skill-box ul { list-style: none; color: var(--muted); font-size: 15px; }
+    .skill-box li { padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .skill-box li:last-child { border-bottom: none; }
+    .skill-box li span {
+      font-family: "JetBrains Mono", monospace; color: var(--text); font-size: 13px;
+      margin-right: 8px;
+    }
+
+    /* ---------- Experience ---------- */
+    .timeline { display: grid; gap: 26px; }
     .item { display: grid; grid-template-columns: 170px 1fr; gap: 20px; }
     .item .when {
       font-family: "JetBrains Mono", monospace; font-size: 14px;
@@ -134,10 +177,19 @@
     }
     .item h3 { font-size: 18px; font-weight: 500; }
     .item .where { color: var(--accent); font-size: 15px; }
+    .item ul { color: var(--muted); font-size: 15px; margin: 6px 0 0 18px; }
+    .item li { margin-bottom: 3px; }
     .item p { color: var(--muted); font-size: 15px; margin-top: 4px; }
 
-    /* Contact */
-    .contact p { color: var(--muted); max-width: 560px; margin-bottom: 28px; }
+    /* ---------- Resume ---------- */
+    .resume-embed {
+      width: 100%; height: 900px; margin-top: 24px;
+      border: 1px solid var(--border); border-radius: 12px; background: #fff;
+    }
+    .resume-fallback { color: var(--muted); padding: 24px; }
+
+    /* ---------- Contact ---------- */
+    .contact p { color: var(--muted); max-width: 560px; margin-bottom: 8px; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -145,12 +197,17 @@
       font-family: "JetBrains Mono", monospace;
     }
 
-    @media (max-width: 640px) {
-      nav ul { gap: 16px; }
-      nav ul li:nth-child(n+3) { display: none; }
-      .hero { padding: 72px 0 60px; }
+    /* ---------- Mobile ---------- */
+    @media (max-width: 720px) {
+      .logo { display: none; }
+      nav .wrap { justify-content: flex-start; }
+      .hero { padding: 60px 0 56px; }
+      .hero .wrap { flex-direction: column-reverse; align-items: flex-start; gap: 28px; }
+      .photo { width: 130px; height: 130px; }
+      .skills-grid { grid-template-columns: 1fr; }
       .item { grid-template-columns: 1fr; gap: 4px; }
       .card { padding: 22px; }
+      .resume-embed { display: none; }
     }
   </style>
 </head>
@@ -162,67 +219,76 @@
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
+  <!-- ===== 1. Home / Introduction ===== -->
   <header class="hero">
     <div class="wrap">
-      <p class="eyebrow">Hi, I'm</p>
-      <h1>Franklin Hatulan.</h1>
-      <p>Computer Science student at the University of Washington Tacoma. I like building backend services and self-hosted tools, mostly in Go and Java, and running them on my own home server.</p>
-      <div class="buttons">
-        <a class="btn primary" href="#projects">See my projects</a>
-        <!-- TODO: put your resume PDF in the repo as resume.pdf -->
-        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
+      <div class="hero-text">
+        <p class="eyebrow">Hi, I'm</p>
+        <h1>Franklin Hatulan.</h1>
+        <p class="tagline">I build backend services and self-hosted tools, then keep them running.</p>
+        <p class="intro">Computer Science &amp; Systems student at the University of Washington Tacoma, interested in backend development, APIs, and infrastructure.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">See my projects</a>
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
+      <img class="photo" src="photo.jpg" alt="Photo of Franklin Hatulan" onerror="this.style.display='none'">
     </div>
   </header>
 
   <main>
+
+    <!-- ===== 2. About Me ===== -->
     <section id="about" class="about">
       <div class="wrap">
         <h2 data-num="01.">About me</h2>
-        <p>I'm working toward a <strong>B.A. in Computer Science and Systems</strong> with a <strong>minor in Technical Communication</strong> at UW Tacoma. Before that I earned my associate's degree at Green River College through Running Start, finishing it alongside high school.</p>
-        <p>I'm drawn to the backend side of things: APIs, services that talk to each other, and infrastructure. I run a small homelab where I containerize my projects and keep them running 24/7. That's taught me as much as any class has.</p>
-        <p>Outside of school and code, I work as a Service Lead in retail, so I'm used to leading a shift, solving problems on the spot, and talking to people.</p>
-        <div class="skills">
-          <span class="tag">Java</span>
-          <span class="tag">Go</span>
-          <span class="tag">Spring Boot</span>
-          <span class="tag">Docker</span>
-          <span class="tag">REST APIs</span>
-          <span class="tag">Git</span>
-          <span class="tag">Linux</span>
-          <span class="tag">HTML / CSS</span>
-        </div>
+        <p>I'm working toward a <strong>B.A. in Computer Science and Systems</strong> with a <strong>minor in Technical Communication</strong> at UW Tacoma (expected Winter 2028). Before transferring, I earned my <strong>associate's degree at Green River College</strong> through Running Start, finishing it alongside high school.</p>
+        <p>What gets me excited about computing is building things I actually use. Most of my projects started because I wanted to solve a problem in my own setup, like getting alerts from my home server or tracking my progress in a game I play. Seeing something I wrote run every day is what keeps me going.</p>
+        <p><strong>Career goals:</strong> I'm looking for a software engineering internship where I can work on backend systems and learn how production services are built and run at scale. Long term, I want to work in backend or infrastructure engineering.</p>
+        <p><strong>Outside of class:</strong> I run a small <strong>homelab</strong> on an old laptop, where I containerize my projects with Docker and keep them running 24/7. I'm also into rhythm games, which is where my osu! project came from. And I'm studying Japanese.</p>
       </div>
     </section>
 
+    <!-- ===== 3. Projects ===== -->
     <section id="projects">
       <div class="wrap">
         <h2 data-num="02.">Projects</h2>
+        <p class="wip-note">// work in progress, updated each quarter</p>
         <div class="projects">
 
           <article class="card">
             <div class="card-head">
               <h3>Homelab Discord Gateway</h3>
-              <span class="status">running in production</span>
+              <span class="status">deployed on my home server</span>
             </div>
-            <p>A lightweight Go service that turns alerts from my self-hosted Docker services into readable Discord notifications, so I know what's happening on my home server without checking it.</p>
+            <p>A lightweight Go service that turns alerts from my self-hosted Docker services into readable Discord notifications, so I know what's happening on my server without checking it.</p>
+            <h4>Features</h4>
             <ul>
               <li>Receives alerts over HTTP and formats service status into clean Discord messages</li>
               <li>Routes each alert to a different Discord channel by URL path using webhooks</li>
-              <li>5-second request timeouts so a slow upstream never hangs the gateway</li>
-              <li>Shipped as a small container with a multi-stage Docker build</li>
+              <li>5-second request timeouts so a slow request never hangs the gateway</li>
+              <li>Packaged as a small container using a multi-stage Docker build</li>
+            </ul>
+            <h4>Challenges &amp; Key Learnings</h4>
+            <ul>
+              <li>Picking Go up from scratch: learning its HTTP server, structs, and error-handling style</li>
+              <li>Learning why timeouts matter: one slow webhook call shouldn't block every other alert</li>
+              <li>Using multi-stage Docker builds to keep the final image small enough for low-power hardware</li>
             </ul>
             <div class="tags">
               <span class="tag">Go</span>
               <span class="tag">Docker</span>
               <span class="tag">Discord Webhooks</span>
+              <span class="tag">REST</span>
             </div>
             <div class="card-links">
               <a href="https://github.com/FranklinHat/discordgateway" target="_blank" rel="noopener">GitHub →</a>
@@ -235,15 +301,23 @@
               <span class="status">in progress</span>
             </div>
             <p>A Spring Boot backend that calculates the potential performance points (pp) a player could earn on an osu! beatmap, based on their actual hit results.</p>
+            <h4>Features</h4>
             <ul>
               <li>Authenticates with the official osu! API using OAuth client credentials</li>
               <li>Takes real 300 / 100 / 50 / miss counts to estimate pp for a play</li>
-              <li>Next up: containerizing it to run on my home server, and adding JUnit tests</li>
+              <li>Next up: containerizing it for my home server and adding JUnit tests</li>
+            </ul>
+            <h4>Challenges &amp; Key Learnings</h4>
+            <ul>
+              <li>Learning Spring Boot for the first time: controllers, services, and dependency injection</li>
+              <li>Handling OAuth authentication and keeping API secrets out of the codebase</li>
+              <li>Replacing hardcoded test values with real user input, and seeing why tests matter as the logic grows</li>
             </ul>
             <div class="tags">
               <span class="tag">Java</span>
               <span class="tag">Spring Boot</span>
               <span class="tag">osu! API</span>
+              <span class="tag">OAuth</span>
             </div>
             <div class="card-links">
               <a href="https://github.com/FranklinHat/osu-pp-tracker-backend" target="_blank" rel="noopener">GitHub →</a>
@@ -252,14 +326,23 @@
 
           <article class="card">
             <div class="card-head">
-              <h3>This Website</h3>
+              <h3>Personal Portfolio Website</h3>
               <span class="status">live</span>
             </div>
-            <p>My personal portfolio, built with plain HTML and CSS and no frameworks. Hosted on GitHub Pages.</p>
+            <p>The site you're on right now: a responsive single-page portfolio built with plain HTML and CSS and hosted on GitHub Pages.</p>
+            <h4>Challenges &amp; Key Learnings</h4>
+            <ul>
+              <li>Building a responsive layout with CSS Grid and Flexbox that works on phones and desktops</li>
+              <li>Debugging GitHub Pages: the Jekyll build was serving my README instead of my <code>index.html</code>, and I fixed it with a <code>.nojekyll</code> file</li>
+              <li>Next up: moving it to my own custom domain through Cloudflare DNS</li>
+            </ul>
             <div class="tags">
               <span class="tag">HTML</span>
               <span class="tag">CSS</span>
               <span class="tag">GitHub Pages</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/FranklinHat/franklinhat.github.io" target="_blank" rel="noopener">GitHub →</a>
             </div>
           </article>
 
@@ -267,16 +350,85 @@
       </div>
     </section>
 
+    <!-- ===== 4. Skills ===== -->
+    <section id="skills">
+      <div class="wrap">
+        <h2 data-num="03.">Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-box">
+            <h3>Languages</h3>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">Go</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+            </div>
+          </div>
+          <div class="skill-box">
+            <h3>Frameworks &amp; Tools</h3>
+            <div class="tags">
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">Linux</span>
+              <span class="tag">IntelliJ IDEA</span>
+              <span class="tag">GoLand</span>
+              <span class="tag">VS Code</span>
+            </div>
+          </div>
+          <div class="skill-box">
+            <h3>Relevant Coursework</h3>
+            <ul>
+              <li><span>TCSS 305</span>Programming Practicum (Java)</li>
+              <li><span>TCSS 321</span>Discrete Structures</li>
+              <li><span>TCSS 371</span>Machine Organization</li>
+            </ul>
+          </div>
+          <div class="skill-box">
+            <h3>Other</h3>
+            <ul>
+              <li>REST APIs &amp; webhooks</li>
+              <li>OAuth authentication</li>
+              <li>Self-hosting &amp; containerization</li>
+              <li>Technical writing (Tech Comm minor)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Experience ===== -->
     <section id="experience">
       <div class="wrap">
-        <h2 data-num="03.">Education &amp; Experience</h2>
+        <h2 data-num="04.">Experience &amp; Education</h2>
         <div class="timeline">
+          <div class="item">
+            <div class="when">Sept 2026 — Now</div>
+            <div>
+              <h3>Service Lead</h3>
+              <div class="where">Lolli &amp; Pops · Tukwila, WA</div>
+              <ul>
+                <li>Lead evening shifts and keep the team coordinated while I balance a full CS course load</li>
+                <li>Handle customer issues and make quick calls on the floor</li>
+              </ul>
+            </div>
+          </div>
+          <div class="item">
+            <div class="when">Apr — Sept 2026</div>
+            <div>
+              <h3>Product Demonstrator</h3>
+              <div class="where">Club Demonstration Services · Covington, WA</div>
+              <ul>
+                <li>Ran in-store product demos and explained products to a high volume of customers each shift</li>
+              </ul>
+            </div>
+          </div>
           <div class="item">
             <div class="when">2025 — 2028</div>
             <div>
               <h3>B.A. Computer Science &amp; Systems</h3>
               <div class="where">University of Washington Tacoma</div>
-              <p>Minor in Technical Communication. Expected graduation Winter 2028.</p>
+              <p>Minor in Technical Communication · Expected Winter 2028</p>
             </div>
           </div>
           <div class="item">
@@ -284,42 +436,41 @@
             <div>
               <h3>Associate's Degree</h3>
               <div class="where">Green River College</div>
-              <p>Completed through Running Start dual enrollment while in high school.</p>
-            </div>
-          </div>
-          <div class="item">
-            <div class="when">2026 — Now</div>
-            <div>
-              <h3>Service Lead</h3>
-              <div class="where">Lolli &amp; Pops · Tukwila, WA</div>
-              <p>Lead evening shifts, keep the team on track, and handle customer issues.</p>
-            </div>
-          </div>
-          <div class="item">
-            <div class="when">2026</div>
-            <div>
-              <h3>Product Demonstrator</h3>
-              <div class="where">Club Demonstration Services · Covington, WA</div>
-              <p>Ran in-store product demos and talked with hundreds of customers a day.</p>
+              <p>Completed through Running Start dual enrollment during high school</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== 6. Resume ===== -->
+    <section id="resume">
+      <div class="wrap">
+        <h2 data-num="05.">Resume</h2>
+        <div class="buttons" style="margin-top:0">
+          <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
+          <a class="btn" href="resume.pdf" download>Download</a>
+        </div>
+        <object class="resume-embed" data="resume.pdf" type="application/pdf">
+          <p class="resume-fallback">Your browser can't show the PDF here. <a href="resume.pdf">Open it directly</a>.</p>
+        </object>
+      </div>
+    </section>
+
+    <!-- ===== 7. Contact ===== -->
     <section id="contact" class="contact">
       <div class="wrap">
-        <h2 data-num="04.">Get in touch</h2>
-        <p>I'm currently looking for software engineering internships. If you have an opportunity or just want to talk tech, my inbox is open.</p>
+        <h2 data-num="06.">Contact</h2>
+        <p>I'm currently looking for software engineering internships. If you have an opportunity or want to talk tech, feel free to reach out.</p>
         <div class="buttons">
-          <!-- TODO: replace with your email -->
-          <a class="btn primary" href="mailto:YOUR_EMAIL_HERE">Email me</a>
-          <!-- TODO: replace with your LinkedIn URL -->
-          <a class="btn" href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+         
+          <a class="btn primary" href="mailto:fmhatulan2@gmail.com">Email me</a>
+          <a class="btn" href="https://www.linkedin.com/in/franklinhat/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/FranklinHat" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
